@@ -54,6 +54,11 @@ app.use('/password', resetPasswordRoutes)
 
 app.use('/premium', premiumFeatureRoutes)
 
+app.use((req, res)=>{
+    console.log('urlll', req.url);
+    res.sendFile(path.join(__dirname, `../ExpenseTrackeFrontend-main/${req.url}`));
+    })
+
 User.hasMany(Expense);
 Expense.belongsTo(User);
 
