@@ -18,9 +18,9 @@ const Expense = require('./models/expenses');
 const Order = require('./models/orders');
 const Forgotpassword = require('./models/forgotpassword');
 const DownloadData = require('./models/downloaddata')
-const helmet = require('helmet');
+//const helmet = require('helmet');
 const compression = require('compression');
-const morgan = require('morgan');
+//const morgan = require('morgan');
 
 
 const userRoutes = require('./routes/user')
@@ -35,12 +35,9 @@ const accessLogStream = fs.createWriteStream(
     );
 
 
-app.use(helmet());
-app.use(compression());
-app.use(morgan('combined', {stream: accessLogStream}));
-
-
-
+// app.use(helmet());
+// app.use(compression());
+// app.use(morgan('combined', {stream: accessLogStream}));
 
 
 app.use(cors());
@@ -55,9 +52,10 @@ app.use('/password', resetPasswordRoutes)
 app.use('/premium', premiumFeatureRoutes)
 
 app.use((req, res)=>{
-    console.log('urlll', req.url);
-    res.sendFile(path.join(__dirname, `../ExpenseTrackeFrontend-main/${req.url}`));
-    })
+console.log('urlll', req.url);
+res.sendFile(path.join(__dirname, `../ExpenseTrackeFrontend-main/${req.url}`));
+
+})
 
 User.hasMany(Expense);
 Expense.belongsTo(User);
